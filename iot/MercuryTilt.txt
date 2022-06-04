@@ -1,0 +1,12 @@
+void setup() {
+  pinMode(4, INPUT);
+  Serial.begin(9600);
+}
+void loop() {
+
+Serial.println(digitalRead(4));
+  if (digitalRead(4) == 1)
+  {
+    Serial.println("Tilted!");
+  }
+}
