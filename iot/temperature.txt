@@ -1,0 +1,21 @@
+#include<OneWire.h>
+#include<DallasTemperature.h>
+#define ONE_WIRE_BUS 2
+
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sesnor(&oneWire);
+
+void setup(){
+	Serial.begin(9600);
+	Serial.println("Dallas Temp:");
+	sensor.begin();
+}
+
+void loop(){
+	Serial.print("requesting temperature:");
+	sensors.requestTemperature();
+	Serial.println("DONE");
+	Serial.print("temperature is:");
+	Serial.println(sensor.getTemp(ByIndex(0));
+	delay(1000);
+}
