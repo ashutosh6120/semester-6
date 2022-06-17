@@ -1,0 +1,23 @@
+void setup(){
+	pinMode(9,OUTPUT);
+	pinMode(10,OUTPUT);
+	pinMode(11,OUTPUT);
+	Serial.begin(9600);
+}
+int r=0,g=127,b=255;
+int dr=1,dg=1, db=-1;
+void loop(){
+	analogWrite(9,r);
+	analogWrite(10,g);
+	analogWrite(11,b);
+	r+=dr;
+	g+=dg;
+	b+=db;
+	if(r==255 || r==0)
+		dr+=-1;
+	if(g==255 || g==0)
+		dg+=-1;
+	if(b==255 || b==0)
+		db+=-1;
+	delay(1);
+}
