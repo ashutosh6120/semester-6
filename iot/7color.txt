@@ -1,0 +1,7 @@
+void setup(){
+    pinMode(9,INPUT);
+    digitalRead(9,HIGH);
+}
+void loop(){
+    
+}
