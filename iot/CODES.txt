@@ -1,0 +1,603 @@
+DHT-11 SENSOR
+
+#include<DHT.h>
+#define DHT_PIN 3
+#define DHT_TYPE DHT11
+
+DHT sesnor(DHT_PIN,DHT_TYPE);
+
+void setup(){
+	Serial.begin(9600);
+	Serial.println("Hello from Humidity sensor");
+	Serial.begin();
+}
+
+void loop(){
+	float humidity = sensor.readHumidity();
+	if(isnan(humidity)){
+		Serial.println("Failed to read humidity sensor");
+	}
+	else{
+		Serial.print("Humidity=");
+		Serial.print(humidity);
+		Serial.print("%");
+	}
+	delay(1000);
+}
+
+
+
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+
+
+BUZZER SENSOR
+
+
+#define BUZZER_PIN 3
+void setup(){
+	pinMode(BUZZER_PIN,OUTPUT);
+}
+
+void loop(){
+	digitalWrite(BUZZER_PIN,HIGH);
+	delay(100);
+	digitalWrite(BUZZER_PIN,LOW);
+	delay(100);
+}
+
+
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+
+RGB SENSOR
+
+
+#define RPIN 9
+#define GPIN 10
+#define BPIN 11
+
+#define LIMIT(x,y)  if (x==25)  y *=-1;
+
+int dr=1,dg=5,db=1;
+int r=0,g=0,b=0;
+
+void setup(){
+    pinMode(RPIN,OUTPUT);
+    pinMode(GPIN,OUTPUT);
+    pinMode(BPIN,OUTPUT);
+}
+void loop(){
+    LIMIT(r,dr);
+    LIMIT(g,dg);
+    LIMIT(b,db);
+    r+=dr;
+    g+=dg;
+    b+=db;
+    analogWrite(RPIN,r);
+    analogWrite(GPIN,g);
+    analogWrite(BPIN,b);
+    delay(10);
+}
+
+
+
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+7 SEGMENT
+
+
+const int LED1=2;
+const int LED2=3;
+const int LED3=3;
+const int LED4=4;
+
+const int LED5=5;
+const int LED6=6;
+const int LED7=7;
+const int LED8=8;
+
+int DELAY=0;
+void setup(){
+	pinMode(LED1,OUTPUT);
+	pinMode(LED2,OUTPUT);
+	pinMode(LED3,OUTPUT);
+	pinMode(LED4,OUTPUT);
+	pinMode(LED5,OUTPUT);
+	pinMode(LED6,OUTPUT);
+	pinMode(LED7,OUTPUT);
+	pinMode(LED8,OUTPUT);
+}
+
+void loop(){
+	for(int i=0;i<10;i++){
+		print_led('0' + i);
+		delay(500);
+	}
+}
+
+void print_led(char c){
+	int lookup_digit[] = {
+		Ob1111110,
+		Ob1000010,
+		Ob1101101,
+		Ob1100111,
+		Ob1010011,
+		Ob0110111,
+		Ob0111111,
+		Ob1100010,
+		Ob1111111,
+		Ob1110111
+	};
+	if('0' <= c <= '9'){
+		digitalWrite(LED1,(((lookup_digit[c-'0'] & 0b1000000)!=0)?LOW:HIGH));
+		digitalWrite(LED2,(((lookup_digit[c-'0'] & 0b0100000)!=0)?LOW:HIGH));
+		digitalWrite(LED3,(((lookup_digit[c-'0'] & 0b0010000)!=0)?LOW:HIGH));
+		digitalWrite(LED4,(((lookup_digit[c-'0'] & 0b0001000)!=0)?LOW:HIGH));
+		digitalWrite(LED5,(((lookup_digit[c-'0'] & 0b0000100)!=0)?LOW:HIGH));
+		digitalWrite(LED6,(((lookup_digit[c-'0'] & 0b0000010)!=0)?LOW:HIGH));
+		digitalWrite(LED7,(((lookup_digit[c-'0'] & 0b0000001)!=0)?LOW:HIGH));
+	}
+}
+
+
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+
+FLAME SENSOR
+
+
+void setup(){
+    Serial.begin(9600);
+}
+void loop(){
+    int flame = analogRead(A0);
+    Serial.println(flame);
+}
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+MERCURY TILT SWITCH
+
+
+void setup() {
+  pinMode(4, INPUT);
+  Serial.begin(9600);
+}
+void loop() {
+
+Serial.println(digitalRead(4));
+  if (digitalRead(4) == 1)
+  {
+    Serial.println("Tilted!");
+  }
+}
+
+
+
+
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+
+TOUCH SENSOR
+
+
+void setup() {
+  pinMode(5, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (digitalRead(5) == 1) {
+    Serial.println("Touch!!!");
+  }
+}
+
+
+
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+BALL SWITCH
+
+
+void setup(){
+	pinMode(5,INPUT);
+	Serial.begin(9600);
+}
+
+void loop(){
+	if(digitalRead(5)){
+		Serial.println("Moved");
+	}
+}
+
+
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+
+LASER EMITTER
+
+
+void setup() {
+  pinMode(2, OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  digitalWrite(2, HIGH);
+  delay(100);
+  digitalWrite(2, LOW);
+  delay(100);
+ 
+}
+
+
+
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+
+TRACKING LINE
+
+
+void setup(){
+    pinMode(5,INPUT);
+    Serial.begin(9600);
+}
+void loop(){
+    if(!digitalRead(5)){
+        Serial.println("sensed");
+    }
+}
+
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+BUTTON SESNOR
+
+
+int lastState=HIGH;
+int currentState;
+void setup(){
+    Serial.begin(9600);
+    pinMode(7,INPUT);
+}
+void loop(){
+    currentState  = digitalRead(7);
+    if(lastState==LOW && currentState==HIGH)
+        Serial.println("button pressed);
+    lastState = currentState;
+    delay(250);
+}
+
+
+
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+
+IR EMITTER SESNOR
+
+void setup(){
+    pinMode(4,INPUT);
+    Serial.begin(9600);
+}
+void loop(){
+    if(digitalRead(4)){
+        Serial.println("detected");
+    }
+    else{
+        Serial.println("not detected");
+    }
+    delay(500);
+}
+    
+
+
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+
+SHOCK SENSOR
+
+
+void setup(){
+    pinMode(2,INPUT);
+    Serial.begin(9600);
+}
+void loop(){
+    if(digitalRead(2)==HIGH){
+        Serial.println("detected");
+    }
+    else{
+        Serial.println("no");
+    }
+}
+
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+JOYSTICK SENSOR
+
+int VRx = A0;
+int VRy = A1;
+int SW = 2;
+
+int xPosition = 0;
+int yPosition = 0;
+int SW_state = 0;
+int mapX = 0;
+int mapY = 0;
+
+void setup() {
+  Serial.begin(9600); 
+  
+  pinMode(VRx, INPUT);
+  pinMode(VRy, INPUT);
+  pinMode(SW, INPUT_PULLUP); 
+  
+}
+
+void loop() {
+  xPosition = analogRead(VRx);
+  yPosition = analogRead(VRy);
+  SW_state = digitalRead(SW);
+  mapX = map(xPosition, 0, 1023, -512, 512);
+  mapY = map(yPosition, 0, 1023, -512, 512);
+  
+  Serial.print("X: ");
+  Serial.print(mapX);
+  Serial.print(" | Y: ");
+  Serial.print(mapY);
+  Serial.print(" | Button: ");
+  Serial.println(SW_state);
+
+  delay(100);
+  
+}
+
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+TAP SENSOR
+
+
+void setup(){
+    pinMode(2,INPUT);
+    Serial.begin(9600);
+}
+void loop(){
+    if(digitalRead(2)==HIGH){
+        Serial.println("no");
+    }
+    else{
+        Serial.println("detected");
+    }
+}
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+ROTARY SENSOR
+
+#define encoder0PinA 2
+#define encoder0PinB 3
+#define encoder0Btn 4
+int encoder0Pos = 0;
+void setup() {
+  Serial.begin(9600);
+  pinMode(encoder0PinA, INPUT_PULLUP);
+  pinMode(encoder0PinB, INPUT_PULLUP);
+  pinMode(encoder0Btn, INPUT_PULLUP);
+  attachInterrupt(0, doEncoder, CHANGE);
+}
+int valRotary,lastValRotary;
+void loop() {
+  int btn = digitalRead(encoder0Btn);
+  Serial.print(btn);
+  Serial.print(" ");
+  Serial.print(valRotary);
+  if(valRotary>lastValRotary)
+  {
+	Serial.print("  CW");
+  }
+  if(valRotary  {
+
+	Serial.print("  CCW");
+  }
+  lastValRotary = valRotary;
+  Serial.println(" ");
+  delay(250);
+}
+void doEncoder()
+{
+  if (digitalRead(encoder0PinA) == digitalRead(encoder0PinB))
+  {
+	encoder0Pos++;
+  }
+  else
+  {
+	encoder0Pos--;
+  }
+  valRotary = encoder0Pos/2.5;
+}
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+
+SMD RGB LED
+
+
+void setup(){
+	pinMode(9,OUTPUT);
+	pinMode(10,OUTPUT);
+	pinMode(11,OUTPUT);
+	Serial.begin(9600);
+}
+int r=0,g=127,b=255;
+int dr=1,dg=1, db=-1;
+void loop(){
+	analogWrite(9,r);
+	analogWrite(10,g);
+	analogWrite(11,b);
+	r+=dr;
+	g+=dg;
+	b+=db;
+	if(r==255 || r==0)
+		dr+=-1;
+	if(g==255 || g==0)
+		dg+=-1;
+	if(b==255 || b==0)
+		db+=-1;
+	delay(1);
+}
+
+
+
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+7 COLOR LED
+
+void setup(){
+    pinMode(9,INPUT);
+    digitalRead(9,HIGH);
+}
+void loop(){
+    
+}
+
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+
+2 COLOR LED
+
+
+int a=8;
+int b=9;
+void setup(){
+    pinMode(a,OUTPUT);
+    pinMode(b,OUTPUT);
+}
+void loop(){
+    digitalWrite(a,HIGH);
+    digitalWrite(b,LOW);
+    delay(1000);
+    digitalWrite(a,LOW);
+    digitalWrite(b,HIGH);
+    delay(1000);
+}
+
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+HEART BEAT SENSOR
+
+
+
+
+void setup(){
+    pinMode(AO,INPUT);
+    Serial.begin(9600);
+}
+void loop(){
+    float pulse;
+    int sum=0;
+    for(int i=0;i<20;i++)
+	sum+=analogRead(AO);
+    pulse=sum/20.00;
+    Serial.println(pulse);
+    delay(100);
+}
+
+
+
+
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+
+
+
+TEMPERATURE SENSOR
+
+
+
+#include<OneWire.h>
+#include<DallasTemperature.h>
+#define ONE_WIRE_BUS 2
+
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sesnor(&oneWire);
+
+void setup(){
+	Serial.begin(9600);
+	Serial.println("Dallas Temp:");
+	sensor.begin();
+}
+
+void loop(){
+	Serial.print("requesting temperature:");
+	sensors.requestTemperature();
+	Serial.println("DONE");
+	Serial.print("temperature is:");
+	Serial.println(sensor.getTemp(ByIndex(0));
+	delay(1000);
+}
+
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
