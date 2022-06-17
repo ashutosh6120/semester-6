@@ -1,0 +1,26 @@
+#define RPIN 9
+#define GPIN 10
+#define BPIN 11
+
+#define LIMIT(x,y)  if (x==25)  y *=-1;
+
+int dr=1,dg=5,db=1;
+int r=0,g=0,b=0;
+
+void setup(){
+    pinMode(RPIN,OUTPUT);
+    pinMode(GPIN,OUTPUT);
+    pinMode(BPIN,OUTPUT);
+}
+void loop(){
+    LIMIT(r,dr);
+    LIMIT(g,dg);
+    LIMIT(b,db);
+    r+=dr;
+    g+=dg;
+    b+=db;
+    analogWrite(RPIN,r);
+    analogWrite(GPIN,g);
+    analogWrite(BPIN,b);
+    delay(10);
+}
