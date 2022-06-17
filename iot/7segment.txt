@@ -1,0 +1,52 @@
+const int LED1=2;
+const int LED2=3;
+const int LED3=3;
+const int LED4=4;
+
+const int LED5=5;
+const int LED6=6;
+const int LED7=7;
+const int LED8=8;
+
+int DELAY=0;
+void setup(){
+	pinMode(LED1,OUTPUT);
+	pinMode(LED2,OUTPUT);
+	pinMode(LED3,OUTPUT);
+	pinMode(LED4,OUTPUT);
+	pinMode(LED5,OUTPUT);
+	pinMode(LED6,OUTPUT);
+	pinMode(LED7,OUTPUT);
+	pinMode(LED8,OUTPUT);
+}
+
+void loop(){
+	for(int i=0;i<10;i++){
+		print_led('0' + i);
+		delay(500);
+	}
+}
+
+void print_led(char c){
+	int lookup_digit[] = {
+		Ob1111110,
+		Ob1000010,
+		Ob1101101,
+		Ob1100111,
+		Ob1010011,
+		Ob0110111,
+		Ob0111111,
+		Ob1100010,
+		Ob1111111,
+		Ob1110111
+	};
+	if('0' <= c <= '9'){
+		digitalWrite(LED1,(((lookup_digit[c-'0'] & 0b1000000)!=0)?LOW:HIGH));
+		digitalWrite(LED2,(((lookup_digit[c-'0'] & 0b0100000)!=0)?LOW:HIGH));
+		digitalWrite(LED3,(((lookup_digit[c-'0'] & 0b0010000)!=0)?LOW:HIGH));
+		digitalWrite(LED4,(((lookup_digit[c-'0'] & 0b0001000)!=0)?LOW:HIGH));
+		digitalWrite(LED5,(((lookup_digit[c-'0'] & 0b0000100)!=0)?LOW:HIGH));
+		digitalWrite(LED6,(((lookup_digit[c-'0'] & 0b0000010)!=0)?LOW:HIGH));
+		digitalWrite(LED7,(((lookup_digit[c-'0'] & 0b0000001)!=0)?LOW:HIGH));
+	}
+}
